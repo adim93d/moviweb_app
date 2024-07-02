@@ -11,13 +11,22 @@ class JSONDataManager(DataManagerInterface):
             data = json.load(handle)
         return data
 
-    def get_all_users(self):
+    """def get_all_users(self):
         # Return all the users all users
         data = self.read_file()
         users_dict = {}
         for user_id, username in data.items():
             users_dict[int(user_id)] = username['name']
-        return users_dict
+        return users_dict"""
+
+    def get_all_users(self):
+        # Return all the users all users
+        data = self.read_file()
+        users_list = []
+        for user_id, username in data.items():
+            users_list.append(username['name'])
+        return users_list
+
 
     def get_user_movies(self, user_id):
         # Return all the movies for a given user

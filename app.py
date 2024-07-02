@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from datamanager.json_data_manager import JSONDataManager
 
 app = Flask(__name__)
@@ -13,7 +13,7 @@ def home():
 @app.route('/users')
 def list_users():
     users = data_manager.get_all_users()
-    return str(users)  # Temporarily returning
+    return render_template('users.html', users=users)
 
 
 @app.route('/users/<user_id>')

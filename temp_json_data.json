@@ -1,0 +1,140 @@
+{
+  "1": {
+    "name": "Neta",
+    "movies": {
+      "1": {
+        "movie_name": "Aladin",
+        "producer": "Kazam",
+        "year": 1998,
+        "rating": 9.3
+      },
+      "2": {
+        "movie_name": "Bagdad",
+        "producer": "Zoing",
+        "year": 2000,
+        "rating": 8.1
+      },
+      "3": {
+        "movie_name": "Cinderella",
+        "producer": "Grimm",
+        "year": 1997,
+        "rating": 8.5
+      }
+    }
+  },
+  "2": {
+    "name": "Alex",
+    "movies": {
+      "1": {
+        "movie_name": "Matrix",
+        "producer": "Wachowski",
+        "year": 1999,
+        "rating": 8.7
+      },
+      "2": {
+        "movie_name": "Inception",
+        "producer": "Nolan",
+        "year": 2010,
+        "rating": 8.8
+      },
+      "3": {
+        "movie_name": "Avatar",
+        "producer": "Cameron",
+        "year": 2009,
+        "rating": 7.8
+      }
+    }
+  },
+  "3": {
+    "name": "Jamie",
+    "movies": {
+      "1": {
+        "movie_name": "Titanic",
+        "producer": "Cameron",
+        "year": 1997,
+        "rating": 7.8
+      },
+      "2": {
+        "movie_name": "Gladiator",
+        "producer": "Scott",
+        "year": 2000,
+        "rating": 8.5
+      },
+      "3": {
+        "movie_name": "Braveheart",
+        "producer": "Gibson",
+        "year": 1995,
+        "rating": 8.3
+      }
+    }
+  },
+  "4": {
+    "name": "Sam",
+    "movies": {
+      "1": {
+        "movie_name": "The Godfather",
+        "producer": "Coppola",
+        "year": 1972,
+        "rating": 9.2
+      },
+      "2": {
+        "movie_name": "Pulp Fiction",
+        "producer": "Tarantino",
+        "year": 1994,
+        "rating": 8.9
+      },
+      "3": {
+        "movie_name": "The Dark Knight",
+        "producer": "Nolan",
+        "year": 2008,
+        "rating": 9.0
+      }
+    }
+  },
+  "5": {
+    "name": "Taylor",
+    "movies": {
+      "1": {
+        "movie_name": "Forrest Gump",
+        "producer": "Zemeckis",
+        "year": 1994,
+        "rating": 8.8
+      },
+      "2": {
+        "movie_name": "The Shawshank Redemption",
+        "producer": "Darabont",
+        "year": 1994,
+        "rating": 9.3
+      },
+      "3": {
+        "movie_name": "The Silence of the Lambs",
+        "producer": "Demme",
+        "year": 1991,
+        "rating": 8.6
+      }
+    }
+  },
+  "6": {
+    "name": "Jordan",
+    "movies": {
+      "1": {
+        "movie_name": "Fight Club",
+        "producer": "Fincher",
+        "year": 1999,
+        "rating": 8.8
+      },
+      "2": {
+        "movie_name": "The Matrix",
+        "producer": "Wachowski",
+        "year": 1999,
+        "rating": 8.7
+      },
+      "3": {
+        "movie_name": "Se7en",
+        "producer": "Fincher",
+        "year": 1995,
+        "rating": 8.6
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+user_id,name,movie_id,movie_name,producer,year,rating
+1,Neta,1,Aladin,Kazam,1998,9.3
+1,Neta,2,Bagdad,Zoing,2000,8.1
+1,Neta,3,Cinderella,Grimm,1997,8.5
+2,Alex,1,Matrix,Wachowski,1999,8.7
+2,Alex,2,Inception,Nolan,2010,8.8
+2,Alex,3,Avatar,Cameron,2009,7.8
+3,Jamie,1,Titanic,Cameron,1997,7.8
+3,Jamie,2,Gladiator,Scott,2000,8.5
+3,Jamie,3,Braveheart,Gibson,1995,8.3
+4,Sam,1,The Godfather,Coppola,1972,9.2
+4,Sam,2,Pulp Fiction,Tarantino,1994,8.9
+4,Sam,3,The Dark Knight,Nolan,2008,9.0
+5,Taylor,1,Forrest Gump,Zemeckis,1994,8.8
+5,Taylor,2,The Shawshank Redemption,Darabont,1994,9.3
+5,Taylor,3,The Silence of the Lambs,Demme,1991,8.6
+6,Jordan,1,Fight Club,Fincher,1999,8.8
+6,Jordan,2,The Matrix,Wachowski,1999,8.7
+6,Jordan,3,Se7en,Fincher,1995,8.6

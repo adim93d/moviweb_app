@@ -27,7 +27,6 @@ class JSONDataManager(DataManagerInterface):
             users_list.append(username['name'])
         return users_list
 
-
     def get_user_movies(self, user_id):
         # Return all the movies for a given user
         data = self.read_file()

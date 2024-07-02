@@ -1,5 +1,5 @@
 import json
-from data_manager_interface import DataManagerInterface
+from moviweb_app.datamanager.data_manager_interface import DataManagerInterface
 
 
 class JSONDataManager(DataManagerInterface):
@@ -23,7 +23,3 @@ class JSONDataManager(DataManagerInterface):
         # Return all the movies for a given user
         data = self.read_file()
         return data[str(user_id)]['movies']
-
-
-# JSONDataManager('temp_json_data.json').get_all_users()
-print(JSONDataManager('temp_json_data.json').get_user_movies(2))

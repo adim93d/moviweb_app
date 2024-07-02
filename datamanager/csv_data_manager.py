@@ -1,5 +1,4 @@
-import csv
-from data_manager_interface import DataManagerInterface
+from moviweb_app.datamanager.data_manager_interface import DataManagerInterface
 
 
 class CSVDataManager(DataManagerInterface):

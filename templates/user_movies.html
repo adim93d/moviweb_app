@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ username }} Movies Collection</title>
+</head>
+<body>
+    <h1>{{ username }} Movies Collection</h1>
+    <ul>
+        {% for movie_id, movie_info in movies.items() %}
+        <li>Movie id:{{movie_id}}
+            <br>
+            Name: {{movie_info['movie_name']}}
+            <br>
+            Producer: {{movie_info['producer']}}
+            <br>
+            Release year: {{movie_info['year']}}
+            <br>
+            Rating: {{movie_info['rating']}}
+            <br>
+            <a href="">Edit movie</a>
+            <a href="">Delete movie</a>
+
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

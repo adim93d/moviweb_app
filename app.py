@@ -13,7 +13,8 @@ def home():
 
 @app.route('/users')
 def list_users():
-    return render_template('users.html', users=USERS)
+    users = data_manager.get_all_users()
+    return render_template('users.html', users=users)
 
 
 @app.route('/users/<user_id>')

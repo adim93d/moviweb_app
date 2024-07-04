@@ -9,7 +9,13 @@
     <br>
     <ul>
         {% for user_id, username in users.items() %}
-        <li><a href="/users/{{user_id}}">{{ username }}</a></li>
+        <li>
+            <a href="/users/{{user_id}}">{{ username }}</a>
+            <br>
+            <a href="">Delete User</a>
+            <a href="">Edit User</a>
+            <br><br>
+        </li>
         {% endfor %}
     </ul>
     <a href="/add_user">Add user</a>

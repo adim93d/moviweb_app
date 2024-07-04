@@ -11,6 +11,10 @@ class JSONDataManager(DataManagerInterface):
             data = json.load(handle)
         return data
 
+    def write_file(self, data):
+        with open(self.filename, 'w') as handle:
+            json.dump(data, handle, indent=4)
+
     def get_all_users(self):
         # Return all the users all users
         data = self.read_file()

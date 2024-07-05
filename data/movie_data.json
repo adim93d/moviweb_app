@@ -135,18 +135,26 @@
     "7": {
         "name": "Adi",
         "movies": {
-            "1": {
-                "movie_name": "Titanic",
-                "producer": "James Cameron",
-                "year": "1997",
-                "rating": "7.9"
-            },
             "2": {
                 "movie_name": "Django Unchained",
                 "producer": "Quentin Tarantino",
                 "year": "2012",
                 "rating": "8.5",
                 "img_url": "https://m.media-amazon.com/images/M/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1_SX300.jpg"
+            },
+            "4": {
+                "movie_name": "Zootopia",
+                "producer": "Byron Howard, Rich Moore, Jared Bush",
+                "year": "2016",
+                "rating": "8.0",
+                "img_url": "https://m.media-amazon.com/images/M/MV5BOTMyMjEyNzIzMV5BMl5BanBnXkFtZTgwNzIyNjU0NzE@._V1_SX300.jpg"
+            },
+            "5": {
+                "movie_name": "Turist \u00d6mer Boga G\u00fcres\u00e7isi",
+                "producer": "Hulki Saner",
+                "year": "1971",
+                "rating": "6.8",
+                "img_url": "https://m.media-amazon.com/images/M/MV5BYzMzZmQ1MjYtNDMzMi00YjI3LThiYmEtZDBjYjFkOGYxYzc3XkEyXkFqcGdeQXVyNDQ2MTMzODA@._V1_SX300.jpg"
             }
         }
     },
@@ -157,5 +165,17 @@
     "9": {
         "name": "Nimrod",
         "movies": {}
+    },
+    "10": {
+        "name": "Adilev",
+        "movies": {
+            "1": {
+                "movie_name": "Peter Pan - original",
+                "producer": "Clyde Geronimi, Wilfred Jackson, Hamilton Luske",
+                "year": "1953",
+                "rating": "7.3",
+                "img_url": "https://m.media-amazon.com/images/M/MV5BMzIwMzUyYTUtMjQ3My00NDc3LWIyZjQtOGUzNDJmNTFlNWUxXkEyXkFqcGdeQXVyMjA0MDQ0Mjc@._V1_SX300.jpg"
+            }
+        }
     }
 }

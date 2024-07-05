@@ -76,7 +76,12 @@ def add_movie(user_id):
     search_result = fetch_movie_details(movie_title_search)
 
     if search_result.get('Response') == 'True':
-        movie_id = str(len(get_user_movies(user_id)) + 1)
+        users = read_data()
+        user_movies = users[user_id]['movies']
+
+        # Generate a new movie ID by finding the max existing movie ID and adding 1
+        new_movie_id = str(max(int(mid) for mid in user_movies.keys()) + 1 if user_movies else 1)
+
         movie_details = {
             "movie_name": search_result['Title'],
             "producer": search_result['Director'],
@@ -85,8 +90,7 @@ def add_movie(user_id):
             "img_url": search_result['Poster']
         }
 
-        users = read_data()
-        users[user_id]['movies'][movie_id] = movie_details
+        users[user_id]['movies'][new_movie_id] = movie_details
         write_data(users)
         message = 'Movie added successfully!'
     else:

@@ -5,10 +5,15 @@
     <title>{{ username }} Movies Collection</title>
 </head>
 <body>
-    <h1>{{ username }} Movies Collection</h1>
+    <h1>{{ username }}'s Movies Collection</h1>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
     <ul>
         {% for movie_id, movie_info in movies.items() %}
-        <li>Movie id:{{movie_id}}
+        <li><img src="{{ movie_info['img_url'] }}" alt="Poster of {{ movie_info['movie_name'] }}" style="width:100px;">
+            <br>
+            Movie id:{{movie_id}}
             <br>
             Name: {{movie_info['movie_name']}}
             <br>
@@ -18,13 +23,15 @@
             <br>
             Rating: {{movie_info['rating']}}
             <br>
-            <a href="">Edit movie</a>
-            <a href="">Delete movie</a>
-
+            <a href="{{ url_for('update_movie_form', user_id=user_id, movie_id=movie_id) }}">Update movie</a>
+            <form action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie_id) }}" method="POST" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
         </li>
         <br>
         {% endfor %}
     </ul>
+    <a href="/users/{{ user_id }}/add_movie">Add new movie</a>
     <a href="/users">Logout</a>
 
 </body>

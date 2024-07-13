@@ -8,16 +8,16 @@
 <body>
     <div class="container">
         <h1>Users</h1>
-        <ul>
+        <div class="user-list">
             {% for user_id, username in users.items() %}
-            <li>
+            <div class="user-box">
                 <a href="/users/{{user_id}}">{{ username }}</a>
                 <form action="{{ url_for('delete_user', user_id=user_id) }}" method="post" style="display:inline;">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-            </li>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
         <a href="/add_user" class="btn">Add User</a>
     </div>
 </body>

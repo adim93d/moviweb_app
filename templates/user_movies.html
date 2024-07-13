@@ -11,29 +11,26 @@
         {% if message %}
         <p>{{ message }}</p>
         {% endif %}
-        <ul>
+        <div class="movie-list">
             {% for movie_id, movie_info in movies.items() %}
-            <li>
+            <div class="movie-box">
                 <img src="{{ movie_info['img_url'] }}" alt="Poster of {{ movie_info['movie_name'] }}" style="width:100px;">
-                <br>
-                Movie ID: {{ movie_id }}
-                <br>
-                Name: {{ movie_info['movie_name'] }}
-                <br>
-                Producer: {{ movie_info['producer'] }}
-                <br>
-                Release Year: {{ movie_info['year'] }}
-                <br>
-                Rating: {{ movie_info['rating'] }}
-                <br>
-                <a href="{{ url_for('update_movie_form', user_id=user_id, movie_id=movie_id) }}" class="btn">Update Movie</a>
-                <form action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie_id) }}" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </li>
-            <br>
+                <div class="movie-details">
+                    <p>Movie ID: {{ movie_id }}</p>
+                    <p>Name: {{ movie_info['movie_name'] }}</p>
+                    <p>Producer: {{ movie_info['producer'] }}</p>
+                    <p>Release Year: {{ movie_info['year'] }}</p>
+                    <p>Rating: {{ movie_info['rating'] }}</p>
+                </div>
+                <div class="movie-actions">
+                    <a href="{{ url_for('update_movie_form', user_id=user_id, movie_id=movie_id) }}" class="btn">Update Movie</a>
+                    <form action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie_id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
         <a href="/users/{{ user_id }}/add_movie" class="btn">Add New Movie</a>
         <a href="/users" class="btn">Logout</a>
     </div>

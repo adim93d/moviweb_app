@@ -98,6 +98,69 @@ ul {
     background-color: #0056b3;
 }
 
+/* User list */
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-box a {
+    flex-grow: 1;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.user-box form {
+    margin-left: 15px;
+}
+
+/* Movie list */
+.movie-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.movie-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.movie-details {
+    flex-grow: 1;
+    margin-left: 15px;
+}
+
+.movie-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 15px;
+}
+
+.movie-box img {
+    flex-shrink: 0;
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
 /* Error page */
 .error-page {
     max-width: 500px;

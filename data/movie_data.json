@@ -168,7 +168,15 @@
     },
     "9": {
         "name": "Nimrod",
-        "movies": {}
+        "movies": {
+            "1": {
+                "movie_name": "Aladin",
+                "producer": "Sujoy Ghosh",
+                "year": "2009",
+                "rating": "4.7",
+                "img_url": "https://m.media-amazon.com/images/M/MV5BMTQxMjY4NzUyM15BMl5BanBnXkFtZTcwMDI4NTk5Mw@@._V1_SX300.jpg"
+            }
+        }
     },
     "11": {
         "name": "Mario",
@@ -181,5 +189,21 @@
                 "img_url": "https://m.media-amazon.com/images/M/MV5BMzIwMzUyYTUtMjQ3My00NDc3LWIyZjQtOGUzNDJmNTFlNWUxXkEyXkFqcGdeQXVyMjA0MDQ0Mjc@._V1_SX300.jpg"
             }
         }
+    },
+    "12": {
+        "name": "borris",
+        "movies": {
+            "1": {
+                "movie_name": "Die Hard 3",
+                "producer": "John McTiernan",
+                "year": "1988",
+                "rating": "8.2",
+                "img_url": "https://m.media-amazon.com/images/M/MV5BZjRlNDUxZjAtOGQ4OC00OTNlLTgxNmQtYTBmMDgwZmNmNjkxXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
+            }
+        }
+    },
+    "13": {
+        "name": "Kosta",
+        "movies": {}
     }
 }

@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Add movie</title>
+    <meta charset="UTF-8">
+    <title>Add Movie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Add a new movie to account number {{ user_id }}</h1>
-    <form action='/users/{{ user_id }}/add_movie' method='post'>
-        <label for="movie_name">Movie Title:</label>
-        <input type="text" id="movie_name" name="movie_name" required>
-        <input type="hidden" id="user_id" name="user_id" value="{{ user_id }}">        <br><br>
-        <button type="submit">Add Movie</button>
-    </form>
+    <div class="container">
+        <h1>Add a New Movie to Account Number {{ user_id }}</h1>
+        <form action='/users/{{ user_id }}/add_movie' method='post'>
+            <label for="movie_name">Movie Title:</label>
+            <input type="text" id="movie_name" name="movie_name" required>
+            <input type="hidden" id="user_id" name="user_id" value="{{ user_id }}">
+            <br><br>
+            <button type="submit" class="btn btn-primary">Add Movie</button>
+        </form>
+    </div>
 </body>
 </html>

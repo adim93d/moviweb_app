@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Users - MovieWeb App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Users</h1>
-    <br>
-    <ul>
-        {% for user_id, username in users.items() %}
-        <li>
-            <a href="/users/{{user_id}}">{{ username }}</a>
-            <br>
-            <form action="{{ url_for('delete_user', user_id=user_id) }}" method="post" style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
-            <br><br>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="/add_user">Add user</a>
+    <div class="container">
+        <h1>Users</h1>
+        <ul>
+            {% for user_id, username in users.items() %}
+            <li>
+                <a href="/users/{{user_id}}">{{ username }}</a>
+                <form action="{{ url_for('delete_user', user_id=user_id) }}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="/add_user" class="btn">Add User</a>
+    </div>
 </body>
 </html>

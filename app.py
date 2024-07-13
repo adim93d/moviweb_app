@@ -129,5 +129,18 @@ def delete_movie(user_id, movie_id):
     return redirect(url_for('list_user_movies', user_id=user_id))
 
 
+@app.route('/users/<user_id>/delete', methods=['POST'])
+def delete_user(user_id):
+    users = read_data()
+    if user_id in users:
+        del users[user_id]
+        write_data(users)
+        message = 'User deleted successfully!'
+    else:
+        message = 'User not found!'
+
+    return redirect(url_for('list_users', message=message))
+
+
 if __name__ == '__main__':
     app.run(debug=True)

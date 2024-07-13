@@ -6,14 +6,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
+    <div class="form-container">
         <h1>Add a New Movie to Account Number {{ user_id }}</h1>
         <form action='/users/{{ user_id }}/add_movie' method='post'>
-            <label for="movie_name">Movie Title:</label>
-            <input type="text" id="movie_name" name="movie_name" required>
+            <div class="form-group">
+                <label for="movie_name">Movie Title:</label>
+                <input type="text" id="movie_name" name="movie_name" required>
+            </div>
             <input type="hidden" id="user_id" name="user_id" value="{{ user_id }}">
-            <br><br>
-            <button type="submit" class="btn btn-primary">Add Movie</button>
+            <div class="form-group">
+                <button type="submit">Add Movie</button>
+            </div>
         </form>
     </div>
 </body>

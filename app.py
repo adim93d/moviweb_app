@@ -1,33 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for  # Import necessary modules from Flask
-from datamanager.json_data_manager import JSONDataManager  # Import JSONDataManager for data management
+from datamanager.SQLiteDataManager import SQLiteDataManager, Movie, User, UserMovies, db
 import requests  # Import requests for API calls
 
-app = Flask(__name__)  # Initialize the Flask application
-data_manager = JSONDataManager('data/movie_data.json')  # Initialize the data manager with the path to the JSON data file
-USERS = data_manager.get_all_users()  # Retrieve all users from the data manager
+
+# Initialize the Flask application
+data_manager = SQLiteDataManager('moviwebapp.db') # Initialize the data manager with the path to the JSON data file
+data_manager.create_tables()
+app = data_manager.app
+# USERS = data_manager.list_all_users()  # Retrieve all users from the data manager
 REQUEST_URL = 'https://www.omdbapi.com/?'  # Base URL for the OMDB API
 API_KEY = 'apikey=3ac01df6'  # API key for the OMDB API
 SEARCH_BY_TITLE = '&t='  # Parameter for searching by title in the OMDB API
-
-
-# Function to get all users
-def get_users():
-    return data_manager.get_all_users()
-
-
-# Function to get all movies for a specific user
-def get_user_movies(user_id):
-    return data_manager.get_user_movies(user_id)
-
-
-# Function to read data from the JSON file
-def read_data():
-    return data_manager.read_file()
-
-
-# Function to write data to the JSON file
-def write_data(data):
-    data_manager.write_file(data)
 
 
 # Function to fetch movie details from the OMDB API based on the movie title
@@ -46,7 +29,7 @@ def home():
 @app.route('/users')
 def list_users():
     try:
-        users = get_users()
+        users = data_manager.list_all_users()
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
     return render_template('users.html', users=users)
@@ -56,8 +39,8 @@ def list_users():
 @app.route('/users/<user_id>')
 def list_user_movies(user_id):
     try:
-        user_movies = get_user_movies(user_id)
-        username = USERS.get(int(user_id))
+        user_movies = data_manager.list_user_movies(user_id)
+        username = data_manager.get_username(user_id)
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
     message = request.args.get('message')
@@ -75,10 +58,7 @@ def add_user_form():
 def add_user():
     username = request.form.get('name')
     try:
-        users = read_data()
-        new_user_id = str(max(int(user_id) for user_id in users.keys()) + 1 if users else 1)
-        users[new_user_id] = {"name": username, "movies": {}}
-        write_data(users)
+        data_manager.add_user(username)
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
     return redirect(url_for('list_users'))
@@ -97,23 +77,29 @@ def add_movie(user_id):
     search_result = fetch_movie_details(movie_title_search)
     try:
         if search_result.get('Response') == 'True':
-            users = read_data()
-            user_movies = users[user_id]['movies']
-            new_movie_id = str(max(int(mid) for mid in user_movies.keys()) + 1 if user_movies else 1)
-            movie_details = {
-                "movie_name": search_result['Title'],
-                "producer": search_result['Director'],
-                "year": search_result['Year'],
-                "rating": search_result['imdbRating'],
-                "img_url": search_result['Poster']
-            }
-            users[user_id]['movies'][new_movie_id] = movie_details
-            write_data(users)
-            message = 'Movie added successfully!'
+            # Create a new Movie object
+            movie = Movie(
+                title=search_result['Title'],
+                producer=search_result['Producer'],
+                release_year=search_result['Year'],
+                rating=search_result['imdbRating'],
+                img_url=search_result['Poster']
+            )
+            # Add the movie to the database
+            data_manager.add_movie(movie)
+
+            # Now link the movie to the user using the UserMovies table
+            user_movie = UserMovies(user_id=user_id, movie_id=movie.movie_id)
+            db.session.add(user_movie)
+            db.session.commit()
+
+            message = 'Movie added and linked to the user successfully!'
         else:
             message = 'Movie not found!'
     except Exception as e:
+        db.session.rollback()  # Rollback in case of an error
         return render_template('error.html', message=str(e)), 500
+
     return redirect(url_for('list_user_movies', user_id=user_id, message=message))
 
 
@@ -121,8 +107,8 @@ def add_movie(user_id):
 @app.route('/users/<user_id>/update_movie/<movie_id>', methods=['GET'])
 def update_movie_form(user_id, movie_id):
     try:
-        users = read_data()
-        movie_details = users[user_id]['movies'][movie_id]
+        users = data_manager.list_user_movies(user_id)
+        movie_details = data_manager.get_movie(movie_id)
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
     return render_template('update_movie.html', user_id=user_id, movie_id=movie_id, movie=movie_details)
@@ -132,16 +118,24 @@ def update_movie_form(user_id, movie_id):
 @app.route('/users/<user_id>/update_movie/<movie_id>', methods=['POST'])
 def update_movie(user_id, movie_id):
     try:
-        users = read_data()
-        movie_details = users[user_id]['movies'][movie_id]
-        movie_details['movie_name'] = request.form.get('movie_name')
-        movie_details['producer'] = request.form.get('producer')
-        movie_details['year'] = request.form.get('year')
-        movie_details['rating'] = request.form.get('rating')
-        movie_details['img_url'] = request.form.get('img_url')
-        write_data(users)
+        # Fetch the existing movie object by movie_id
+        movie = db.session.query(Movie).get(movie_id)
+        if not movie:
+            raise Exception('Movie not found')
+
+        # Update the movie object with data from the form
+        movie.title = request.form.get('movie_name')
+        movie.producer = request.form.get('producer')
+        movie.release_year = request.form.get('year')
+        movie.rating = request.form.get('rating')
+        movie.img_url = request.form.get('img_url')
+
+        # Call the data_manager to update the movie in the database
+        data_manager.update_movie(movie)
+
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
+
     return redirect(url_for('list_user_movies', user_id=user_id))
 
 
@@ -149,28 +143,27 @@ def update_movie(user_id, movie_id):
 @app.route('/users/<user_id>/delete_movie/<movie_id>', methods=['POST'])
 def delete_movie(user_id, movie_id):
     try:
-        users = read_data()
-        del users[user_id]['movies'][movie_id]
-        write_data(users)
+        users = data_manager.list_user_movies(user_id)
+        data_manager.delete_movie(movie_id)
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
     return redirect(url_for('list_user_movies', user_id=user_id))
 
 
-# Route to handle the deletion of a user
-@app.route('/users/<user_id>/delete', methods=['POST'])
-def delete_user(user_id):
-    try:
-        users = read_data()
-        if user_id in users:
-            del users[user_id]
-            write_data(users)
-            message = 'User deleted successfully!'
-        else:
-            message = 'User not found!'
-    except Exception as e:
-        return render_template('error.html', message=str(e)), 500
-    return redirect(url_for('list_users', message=message))
+# # Route to handle the deletion of a user
+# @app.route('/users/<user_id>/delete', methods=['POST'])
+# def delete_user(user_id):
+#     try:
+#         users = read_data()
+#         if user_id in users:
+#             del users[user_id]
+#             write_data(users)
+#             message = 'User deleted successfully!'
+#         else:
+#             message = 'User not found!'
+#     except Exception as e:
+#         return render_template('error.html', message=str(e)), 500
+#     return redirect(url_for('list_users', message=message))
 
 
 # Custom error handler for 404 - Page Not Found

@@ -64,6 +64,33 @@ class SQLiteDataManager(DataManagerInterface):
             db.session.delete(movie)
             db.session.commit()
 
+    def delete_movie_for_user(self, user_id, movie_id):
+        try:
+            # Step 1: Remove the link between the user and the movie in user_movies
+            db.session.query(UserMovies).filter(
+                UserMovies.user_id == user_id,
+                UserMovies.movie_id == movie_id
+            ).delete()
+
+            # Step 2: Check if any other users are linked to this movie
+            other_users_linked = db.session.query(UserMovies).filter(
+                UserMovies.movie_id == movie_id
+            ).count()
+
+            # Step 3: If no other users are linked to the movie, delete it
+            if other_users_linked == 0:
+                movie = db.session.query(Movie).get(movie_id)
+                if movie:
+                    db.session.delete(movie)
+
+            # Commit the changes
+            db.session.commit()
+
+        except Exception as e:
+            db.session.rollback()
+            raise e
+
+
 # Define the Movie class using the global db instance
 class Movie(db.Model):
     __tablename__ = "movies"

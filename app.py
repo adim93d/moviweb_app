@@ -148,14 +148,18 @@ def update_movie(user_id, movie_id):
 
 
 # Route to handle the deletion of a movie for a specific user
-@app.route('/users/<user_id>/delete_movie/<movie_id>', methods=['POST'])
+@app.route('/users/<user_id>/movies/<movie_id>/delete', methods=['POST'])
 def delete_movie(user_id, movie_id):
     try:
-        users = data_manager.list_user_movies(user_id)
-        data_manager.delete_movie(movie_id)
+        # Call the data manager to remove the movie for the user and clean up if needed
+        data_manager.delete_movie_for_user(user_id, movie_id)
+        message = 'Movie removed from your collection.'
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
-    return redirect(url_for('list_user_movies', user_id=user_id))
+
+    return redirect(url_for('list_user_movies', user_id=user_id, message=message))
+
+
 
 
 # # Route to handle the deletion of a user

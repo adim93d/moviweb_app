@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for  # Import necessary modules from Flask
-from datamanager.SQLiteDataManager import SQLiteDataManager, Movie, User, UserMovies, db
+from flask import render_template, request, redirect, url_for  # Import necessary modules from Flask
+from moviweb_app.SQLiteDataManager import SQLiteDataManager, Movie, User, UserMovies, db
 import requests  # Import requests for API calls
 
 
@@ -58,7 +58,8 @@ def add_user_form():
 def add_user():
     username = request.form.get('name')
     try:
-        data_manager.add_user(username)
+        new_user = User(username=username)
+        data_manager.add_user(new_user)
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
     return redirect(url_for('list_users'))

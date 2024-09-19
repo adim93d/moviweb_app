@@ -5,13 +5,13 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
 # Initialize the Flask app and SQLAlchemy globally
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 db = SQLAlchemy()
 
 class SQLiteDataManager(DataManagerInterface):
     def __init__(self, db_file_name: str):
         self.app = app  # Use the global Flask app
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///../data/{db_file_name}'
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_file_name}'
         self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         db.init_app(self.app)  # Initialize SQLAlchemy with the Flask app
 

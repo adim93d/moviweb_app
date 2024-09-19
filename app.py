@@ -78,23 +78,30 @@ def add_movie(user_id):
     search_result = fetch_movie_details(movie_title_search)
     try:
         if search_result.get('Response') == 'True':
-            # Create a new Movie object
-            movie = Movie(
-                title=search_result.get('Title', 'Unknown Title'),
-                director=search_result.get('Director', 'Unknown Director'),  # Director instead of Producer
-                release_year=search_result.get('Year', 'Unknown Year'),
-                rating=search_result.get('imdbRating', '0'),
-                img_url=search_result.get('Poster', 'default_image.jpg')  # Default image if Poster not available
-            )
-            # Add the movie to the database
-            data_manager.add_movie(movie)
+            # Check if the movie already exists in the database by title
+            existing_movie = db.session.query(Movie).filter_by(title=search_result.get('Title')).first()
+
+            if existing_movie:
+                movie = existing_movie  # If movie exists, use the existing record
+                message = 'Movie already exists in the database. Linked to the user!'
+            else:
+                # Create a new Movie object if it doesn't exist
+                movie = Movie(
+                    title=search_result.get('Title', 'Unknown Title'),
+                    director=search_result.get('Director', 'Unknown Director'),  # Director instead of Producer
+                    release_year=search_result.get('Year', 'Unknown Year'),
+                    rating=search_result.get('imdbRating', '0'),
+                    img_url=search_result.get('Poster', 'default_image.jpg')  # Default image if Poster not available
+                )
+                # Add the movie to the database
+                data_manager.add_movie(movie)
+                message = 'Movie added and linked to the user successfully!'
 
             # Link the movie to the user using the UserMovies table
             user_movie = UserMovies(user_id=user_id, movie_id=movie.movie_id)
             db.session.add(user_movie)
             db.session.commit()
 
-            message = 'Movie added and linked to the user successfully!'
         else:
             message = 'Movie not found!'
     except Exception as e:

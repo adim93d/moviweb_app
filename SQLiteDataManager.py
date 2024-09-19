@@ -52,7 +52,7 @@ class SQLiteDataManager(DataManagerInterface):
         existing_movie = db.session.query(Movie).get(movie.movie_id)
         if existing_movie:
             existing_movie.title = movie.title
-            existing_movie.producer = movie.producer
+            existing_movie.director = movie.director
             existing_movie.release_year = movie.release_year
             existing_movie.rating = movie.rating
             existing_movie.img_url = movie.img_url
@@ -70,7 +70,7 @@ class Movie(db.Model):
 
     movie_id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String)
-    producer = Column(String)
+    director = Column(String)
     release_year = Column(Integer)
     rating = Column(Float)
     img_url = Column(String)

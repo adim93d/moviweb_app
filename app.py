@@ -80,16 +80,16 @@ def add_movie(user_id):
         if search_result.get('Response') == 'True':
             # Create a new Movie object
             movie = Movie(
-                title=search_result['Title'],
-                producer=search_result['Producer'],
-                release_year=search_result['Year'],
-                rating=search_result['imdbRating'],
-                img_url=search_result['Poster']
+                title=search_result.get('Title', 'Unknown Title'),
+                director=search_result.get('Director', 'Unknown Director'),  # Director instead of Producer
+                release_year=search_result.get('Year', 'Unknown Year'),
+                rating=search_result.get('imdbRating', '0'),
+                img_url=search_result.get('Poster', 'default_image.jpg')  # Default image if Poster not available
             )
             # Add the movie to the database
             data_manager.add_movie(movie)
 
-            # Now link the movie to the user using the UserMovies table
+            # Link the movie to the user using the UserMovies table
             user_movie = UserMovies(user_id=user_id, movie_id=movie.movie_id)
             db.session.add(user_movie)
             db.session.commit()
@@ -126,7 +126,7 @@ def update_movie(user_id, movie_id):
 
         # Update the movie object with data from the form
         movie.title = request.form.get('movie_name')
-        movie.producer = request.form.get('producer')
+        movie.director = request.form.get('director')
         movie.release_year = request.form.get('year')
         movie.rating = request.form.get('rating')
         movie.img_url = request.form.get('img_url')

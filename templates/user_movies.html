@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ username }} Movies Collection</title>
+    <title>{{ username }}'s Movies Collection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -12,19 +12,19 @@
         <p>{{ message }}</p>
         {% endif %}
         <div class="movie-list">
-            {% for movie_id, movie_info in movies.items() %}
+            {% for movie in movies %}
             <div class="movie-box">
-                <img src="{{ movie_info['img_url'] }}" alt="Poster of {{ movie_info['movie_name'] }}" style="width:100px;">
+                <img src="{{ movie.img_url }}" alt="Poster of {{ movie.title }}" style="width:100px;">
                 <div class="movie-details">
-                    <p>Movie ID: {{ movie_id }}</p>
-                    <p>Name: {{ movie_info['movie_name'] }}</p>
-                    <p>Producer: {{ movie_info['producer'] }}</p>
-                    <p>Release Year: {{ movie_info['year'] }}</p>
-                    <p>Rating: {{ movie_info['rating'] }}</p>
+                    <p>Movie ID: {{ movie.movie_id }}</p>
+                    <p>Name: {{ movie.title }}</p>
+                    <p>Producer: {{ movie.producer }}</p>
+                    <p>Release Year: {{ movie.release_year }}</p>
+                    <p>Rating: {{ movie.rating }}</p>
                 </div>
                 <div class="movie-actions">
-                    <a href="{{ url_for('update_movie_form', user_id=user_id, movie_id=movie_id) }}" class="btn">Update Movie</a>
-                    <form action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie_id) }}" method="POST" style="display:inline;">
+                    <a href="{{ url_for('update_movie_form', user_id=user_id, movie_id=movie.movie_id) }}" class="btn">Update Movie</a>
+                    <form action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie.movie_id) }}" method="POST" style="display:inline;">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>

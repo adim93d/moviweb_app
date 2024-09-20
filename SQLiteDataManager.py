@@ -92,6 +92,7 @@ class SQLiteDataManager(DataManagerInterface):
 
 
 # Define the Movie class using the global db instance
+# Define the Movie class using the global db instance
 class Movie(db.Model):
     __tablename__ = "movies"
 
@@ -101,7 +102,11 @@ class Movie(db.Model):
     release_year = Column(Integer)
     rating = Column(Float)
     img_url = Column(String)
+
+    # Relationships
     user_movies = relationship('UserMovies', back_populates='movie')
+    reviews = relationship('Review', back_populates='movie')
+
 
 # Define the User class
 class User(db.Model):
@@ -109,7 +114,11 @@ class User(db.Model):
 
     user_id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String)
+
+    # Relationships
     user_movies = relationship('UserMovies', back_populates='user')
+    reviews = relationship('Review', back_populates='user')
+
 
 # Define the UserMovies class
 class UserMovies(db.Model):
@@ -117,5 +126,22 @@ class UserMovies(db.Model):
 
     user_id = Column(Integer, ForeignKey('users.user_id'), primary_key=True)
     movie_id = Column(Integer, ForeignKey('movies.movie_id'), primary_key=True)
+
+    # Relationships
     user = relationship('User', back_populates='user_movies')
     movie = relationship('Movie', back_populates='user_movies')
+
+
+# Define the Review class
+class Review(db.Model):
+    __tablename__ = "reviews"
+
+    review_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.user_id'))
+    movie_id = Column(Integer, ForeignKey('movies.movie_id'))
+    review_text = Column(String)
+    rating = Column(Float)
+
+    # Relationships
+    user = relationship('User', back_populates='reviews')
+    movie = relationship('Movie', back_populates='reviews')

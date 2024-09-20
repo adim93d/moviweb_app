@@ -91,6 +91,10 @@ class SQLiteDataManager(DataManagerInterface):
             raise e
 
 
+    def add_user_review(self, review):
+        db.session.add(review)
+        db.session.commit()
+
 # Define the Movie class using the global db instance
 # Define the Movie class using the global db instance
 class Movie(db.Model):

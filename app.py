@@ -1,3 +1,5 @@
+from crypt import methods
+
 from flask import render_template, request, redirect, url_for  # Import necessary modules from Flask
 from moviweb_app.SQLiteDataManager import SQLiteDataManager, Movie, User, UserMovies, db
 import requests  # Import requests for API calls
@@ -159,6 +161,15 @@ def delete_movie(user_id, movie_id):
 
     return redirect(url_for('list_user_movies', user_id=user_id, message=message))
 
+
+@app.route('/users/<user_id>/movies/<movie_id>/add_review', methods=['GET'])
+def add_review_form(user_id, movie_id):
+    return render_template('add_review', user_id=user_id, movie_id=movie_id)
+
+
+@app.route('/users/<user_id>/movies/<movie_id>/add_review', methods=['GET'])
+def add_review(user_id, movie_id):
+    pass
 
 
 

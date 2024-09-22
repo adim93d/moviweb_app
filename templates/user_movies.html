@@ -21,9 +21,13 @@
                     <p>Director: {{ movie.director }}</p>
                     <p>Release Year: {{ movie.release_year }}</p>
                     <p>Rating: {{ movie.rating }}</p>
+                    <p>User Rating: {{ user_rating }}</p>
                 </div>
                 <div class="movie-actions">
                     <a href="{{ url_for('update_movie_form', user_id=user_id, movie_id=movie.movie_id) }}" class="btn">Update Movie</a>
+                    <a href="{{ url_for('add_review_form', user_id=user_id, movie_id=movie.movie_id) }}" class="btn">Add Review</a>
+                    <a href="{{ url_for('read_movie_reviews', user_id=user_id, movie_id=movie.movie_id) }}" class="btn">Read Reviews</a>
+
                     <form action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie.movie_id) }}" method="POST" style="display:inline;">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>

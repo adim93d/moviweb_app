@@ -1,7 +1,7 @@
 from crypt import methods
 
 from flask import render_template, request, redirect, url_for  # Import necessary modules from Flask
-from moviweb_app.SQLiteDataManager import SQLiteDataManager, Movie, User, UserMovies, db
+from moviweb_app.SQLiteDataManager import SQLiteDataManager, Movie, User, UserMovies, db, Review
 import requests  # Import requests for API calls
 
 
@@ -164,15 +164,30 @@ def delete_movie(user_id, movie_id):
 
 @app.route('/users/<user_id>/movies/<movie_id>/add_review', methods=['GET'])
 def add_review_form(user_id, movie_id):
-    return render_template('add_review', user_id=user_id, movie_id=movie_id)
+    title = data_manager.get_movie(movie_id).title
+    return render_template('add_review.html', user_id=user_id, movie_id=movie_id, title=title)
 
 
-@app.route('/users/<user_id>/movies/<movie_id>/add_review', methods=['GET'])
+@app.route('/users/<user_id>/movies/<movie_id>/add_review', methods=['POST'])
 def add_review(user_id, movie_id):
+    review_text = request.form.get('review_text')
+    rating = request.form.get('rating')
+    try:
+        new_review = Review(
+            user_id=user_id,
+            movie_id=movie_id,
+            review_text=review_text,
+            rating=rating)
+        data_manager.add_user_review(new_review)
+
+    except Exception as e:
+        return render_template('error.html', message=str(e)), 500
+    return redirect(url_for('list_user_movies', user_id=user_id))
+
+
+@app.route('/users/<user_id>/movies/<movie_id>/read_views', methods=['GET'])
+def read_movie_reviews(user_id, movie_id):
     pass
-
-
-
 # # Route to handle the deletion of a user
 # @app.route('/users/<user_id>/delete', methods=['POST'])
 # def delete_user(user_id):

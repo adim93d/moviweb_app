@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <div class="container">
-        <div class="jumbotron">
-            <h1>Welcome to the Online Movie App</h1>
-            <a href="{{ url_for('list_users') }}" class="btn">Login</a>
-        </div>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Welcome to Movie Collection App</h1>
+    <a href="{{ url_for('list_users') }}" class="btn btn-primary">View Users</a>
+</div>
+{% endblock %}

@@ -1,237 +1,152 @@
-/* static/styles.css */
+/* Import Bootstrap */
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
 
-/* Global styles */
+/* General page settings */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    width: 80%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa; /* Light grey background */
+    font-family: 'Arial', sans-serif;
+    padding-top: 20px;
 }
 
 h1, h2, h3 {
-    color: #333;
+    color: #343a40; /* Dark grey text for headers */
 }
 
-p {
-    color: #666;
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-a {
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #0056b3;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-/* Forms */
 .form-container {
-    max-width: 500px;
-    margin: 20px auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.form-container h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.5em;
+/* Buttons */
+.btn-custom {
+    background-color: #6c757d; /* Bootstrap secondary button color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
+.btn-custom:hover {
+    background-color: #5a6268; /* Slightly darker for hover effect */
+}
+
+.btn {
+    margin-bottom: 10px;
+}
+
+/* Form styling */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
-    font-size: 1.2em;
+    font-weight: bold;
     margin-bottom: 5px;
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"] {
-    width: calc(100% - 20px);
+.form-control {
+    width: 100%;
     padding: 10px;
-    font-size: 1em;
+    font-size: 16px;
+    border-radius: 4px;
     border: 1px solid #ced4da;
-    border-radius: 5px;
 }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="email"]:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+input[type="text"], input[type="number"], input[type="email"], input[type="password"], textarea {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
 }
 
-.form-group button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1.2em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+textarea {
+    resize: vertical;
 }
 
-.form-group button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-/* User list */
-.user-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.user-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background-color: #e9ecef;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.user-box a {
-    flex-grow: 1;
-    font-size: 1.2em;
-    color: #333;
-}
-
-.user-box form {
-    margin-left: 15px;
-}
-
-/* Movie list */
-.movie-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.movie-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background-color: #e9ecef;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.movie-details {
-    flex-grow: 1;
-    margin-left: 15px;
-}
-
-.movie-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-left: 15px;
-}
-
-.movie-box img {
-    flex-shrink: 0;
-    width: 100px;
-    height: auto;
-    border-radius: 5px;
-}
-
-/* Error page */
+/* Error Page */
 .error-page {
-    max-width: 500px;
-    margin: 20px auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    padding: 50px;
 }
 
 .error-page h1 {
-    font-size: 3em;
-    color: #dc3545;
-    margin-bottom: 10px;
-}
-
-.error-page h2 {
-    font-size: 2em;
-    color: #333;
+    font-size: 3rem;
     margin-bottom: 20px;
 }
 
 .error-page p {
-    font-size: 1.2em;
-    color: #666;
+    font-size: 1.2rem;
+}
+
+/* Reviews Section */
+.reviews-section {
+    margin-top: 20px;
+}
+
+.reviews-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.reviews-section li {
+    background-color: #f1f3f5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-item {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Movie Details */
+.movie-details {
     margin-bottom: 20px;
 }
 
-.error-page a {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+.movie-details img {
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
-.error-page a:hover {
-    background-color: #0056b3;
-}
+/* Small screen adjustments */
+@media (max-width: 576px) {
+    .container, .form-container {
+        padding: 10px;
+    }
 
-/* Button styles */
-.btn {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-}
+    h1 {
+        font-size: 1.5rem;
+    }
 
-.btn:hover {
-    background-color: #0056b3;
-}
+    .btn-custom {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
-.btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
+    .movie-details img {
+        width: 100%; /* Full-width for smaller screens */
+    }
 }

@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Users - MovieWeb App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Users</h1>
-        <div class="user-list">
-            {% for user in users %}
-<           div class="user-box">
-                <a href="/users/{{ user.user_id }}">{{ user.username }}</a>
-            </div>
-            {% endfor %}
-        </div>
-        <a href="/add_user" class="btn">Add User</a>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Users</h1>
+    <ul class="list-group">
+        {% for user in users %}
+        <li class="list-group-item">
+            <a href="{{ url_for('list_user_movies', user_id=user.user_id) }}">{{ user.username }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('add_user_form') }}" class="btn btn-primary mt-3">Add New User</a>
+</div>
+{% endblock %}

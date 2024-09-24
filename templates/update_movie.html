@@ -1,43 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Update Movie</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <div class="form-container">
-        <h1>Update Movie</h1>
-        <form action="{{ url_for('update_movie', user_id=user_id, movie_id=movie_id) }}" method="POST">
-            <div class="form-group">
-                <label for="movie_name">Movie Name:</label>
-                <input type="text" id="movie_name" name="movie_name" value="{{ movie.title }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="director">Director:</label>
-                <input type="text" id="director" name="director" value="{{ movie.director }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="year">Year:</label>
-                <input type="text" id="year" name="year" value="{{ movie.release_year }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="rating">Rating:</label>
-                <input type="text" id="rating" name="rating" value="{{ movie.rating }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="img_url">Image URL:</label>
-                <input type="text" id="img_url" name="img_url" value="{{ movie.img_url }}" required>
-            </div>
-
-            <div class="form-group">
-                <button type="submit">Update Movie</button>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Update Movie</h1>
+    <form action="{{ url_for('update_movie', user_id=user_id, movie_id=movie_id) }}" method="POST">
+        <div class="form-group">
+            <label for="movie_name">Movie Name:</label>
+            <input type="text" class="form-control" id="movie_name" name="movie_name" value="{{ movie.title }}" required>
+        </div>
+        <div class="form-group">
+            <label for="director">Director:</label>
+            <input type="text" class="form-control" id="director" name="director" value="{{ movie.director }}" required>
+        </div>
+        <div class="form-group">
+            <label for="year">Release Year:</label>
+            <input type="text" class="form-control" id="year" name="year" value="{{ movie.release_year }}" required>
+        </div>
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <input type="text" class="form-control" id="rating" name="rating" value="{{ movie.rating }}" required>
+        </div>
+        <div class="form-group">
+            <label for="img_url">Image URL:</label>
+            <input type="text" class="form-control" id="img_url" name="img_url" value="{{ movie.img_url }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Update Movie</button>
+    </form>
+</div>
+{% endblock %}

@@ -21,7 +21,6 @@
                     <p>Director: {{ movie.director }}</p>
                     <p>Release Year: {{ movie.release_year }}</p>
                     <p>Rating: {{ movie.rating }}</p>
-                    <p>User Rating: {{ user_rating }}</p>
                 </div>
                 <div class="movie-actions">
                     <a href="{{ url_for('update_movie_form', user_id=user_id, movie_id=movie.movie_id) }}" class="btn">Update Movie</a>

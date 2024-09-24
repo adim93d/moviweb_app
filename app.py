@@ -185,9 +185,19 @@ def add_review(user_id, movie_id):
     return redirect(url_for('list_user_movies', user_id=user_id))
 
 
-@app.route('/users/<user_id>/movies/<movie_id>/read_views', methods=['GET'])
+@app.route('/users/<user_id>/movies/<movie_id>/reviews', methods=['GET'])
 def read_movie_reviews(user_id, movie_id):
-    pass
+    try:
+        movie = data_manager.get_movie(movie_id)
+        reviews = db.session.query(Review).filter(Review.movie_id == movie_id).all()
+        avg_user_rating = data_manager.get_avg_user_rating(movie_id)
+    except Exception as e:
+        return render_template('error.html', message=str(e)), 500
+
+    return render_template('movie_reviews.html', movie=movie, reviews=reviews, avg_user_rating=avg_user_rating,
+                           user_id=user_id)
+
+
 # # Route to handle the deletion of a user
 # @app.route('/users/<user_id>/delete', methods=['POST'])
 # def delete_user(user_id):

@@ -95,6 +95,24 @@ class SQLiteDataManager(DataManagerInterface):
         db.session.add(review)
         db.session.commit()
 
+    def get_avg_user_rating(self, movie_id):
+        try:
+            # Query the reviews for the specified movie
+            reviews = db.session.query(Review).filter(Review.movie_id == movie_id).all()
+
+            if not reviews:
+                return 0  # If no reviews, return 0 as the average rating
+
+            # Calculate the average rating
+            total_rating = sum(review.rating for review in reviews)
+            avg_rating = total_rating / len(reviews)
+
+            return avg_rating
+        except Exception as e:
+            print(f"Error calculating average rating: {e}")
+            return 0  # Return 0 if an error occurs
+
+
 # Define the Movie class using the global db instance
 # Define the Movie class using the global db instance
 class Movie(db.Model):

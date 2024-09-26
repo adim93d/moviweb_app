@@ -1,15 +1,15 @@
-from crypt import methods
 
 from flask import render_template, request, redirect, url_for  # Import necessary modules from Flask
 from moviweb_app.SQLiteDataManager import SQLiteDataManager, Movie, User, UserMovies, db, Review
 import requests  # Import requests for API calls
+from api import api
 
 
 # Initialize the Flask application
 data_manager = SQLiteDataManager('moviwebapp.db') # Initialize the data manager with the path to the JSON data file
 data_manager.create_tables()
 app = data_manager.app
-# USERS = data_manager.list_all_users()  # Retrieve all users from the data manager
+app.register_blueprint(api, url_prefix='/api')
 REQUEST_URL = 'https://www.omdbapi.com/?'  # Base URL for the OMDB API
 API_KEY = 'apikey=3ac01df6'  # API key for the OMDB API
 SEARCH_BY_TITLE = '&t='  # Parameter for searching by title in the OMDB API

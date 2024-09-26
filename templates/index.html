@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-    <h1>Welcome to Movie Collection App</h1>
-    <a href="{{ url_for('list_users') }}" class="btn btn-primary">View Users</a>
+    <h1>Welcome to MovieWeb</h1>
+    <div class="text-center">
+        <a href="{{ url_for('list_users') }}" class="btn btn-primary">Login</a>
+    </div>
 </div>
+
 {% endblock %}

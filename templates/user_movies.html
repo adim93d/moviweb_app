@@ -1,21 +1,38 @@
 {% extends "base.html" %}
+
 {% block content %}
 <div class="container">
-    <h1>Movies for {{ username }}</h1>
+    <h1>{{ username }}'s Movie List</h1>
+
     {% if message %}
         <div class="alert alert-info">{{ message }}</div>
     {% endif %}
-    <ul class="list-group">
+
+    <div class="row">
         {% for movie in movies %}
-        <li class="list-group-item">
-            <a href="{{ url_for('read_movie_reviews', user_id=user_id, movie_id=movie.movie_id) }}">{{ movie.title }}</a>
-            <a href="{{ url_for('update_movie_form', user_id=user_id, movie_id=movie.movie_id) }}" class="btn btn-warning btn-sm">Edit</a>
-            <form action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie.movie_id) }}" method="POST" class="d-inline">
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
-        </li>
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card mb-4 movie-card">
+                <img class="card-img-top" src="{{ movie.img_url }}" alt="{{ movie.title }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">
+                        Directed by {{ movie.director }}<br>
+                        Released: {{ movie.release_year }}<br>
+                        Rating: {{ movie.rating }}
+                    </p>
+                    <div class="d-flex flex-column mt-auto movie-buttons">
+                        <a href="{{ url_for('read_movie_reviews', user_id=user_id, movie_id=movie.movie_id) }}" class="btn btn-info mb-2">View Reviews</a>
+                        <a href="{{ url_for('update_movie_form', user_id=user_id, movie_id=movie.movie_id) }}" class="btn btn-warning mb-2">Edit</a>
+                        <form action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie.movie_id) }}" method="POST">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
+
     <a href="{{ url_for('add_movie_form', user_id=user_id) }}" class="btn btn-primary mt-3">Add New Movie</a>
 </div>
 {% endblock %}

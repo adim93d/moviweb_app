@@ -1,25 +1,35 @@
 {% extends "base.html" %}
+
 {% block content %}
 <div class="container">
-    <h1>Reviews for {{ movie.title }}</h1>
-    <div class="movie-details mb-4">
-        <img src="{{ movie.img_url }}" alt="Poster of {{ movie.title }}" style="width:150px;">
-        <p>Movie ID: {{ movie.movie_id }}</p>
-        <p>Title: {{ movie.title }}</p>
-        <p>Director: {{ movie.director }}</p>
-        <p>Rating: {{ movie.rating }}</p>
-        <p>Average User Rating: {{ avg_user_rating }}</p>
+    <div class="row mb-4">
+        <!-- Movie poster -->
+        <div class="col-md-4">
+            <img src="{{ movie.img_url }}" alt="Poster of {{ movie.title }}" class="img-fluid">
+        </div>
+
+        <!-- Movie details -->
+        <div class="col-md-8">
+            <h1>{{ movie.title }}</h1>
+            <p><strong>Directed by:</strong> {{ movie.director }}</p>
+            <p><strong>Release Year:</strong> {{ movie.release_year }}</p>
+            <p><strong>Rating:</strong> {{ movie.rating }}</p>
+            <p><strong>Average User Rating:</strong> {{ avg_user_rating }}</p>
+        </div>
     </div>
 
+    <hr>
+
+    <!-- User Reviews Section -->
+    <h2>User Reviews</h2>
     <div class="reviews-section">
-        <h2>User Reviews</h2>
         {% if reviews %}
             <ul class="list-group">
             {% for review in reviews %}
-                <li class="list-group-item">
-                    <strong>Review by User ID {{ review.user_id }}:</strong>
+                <li class="list-group-item mb-3">
+                    <p><strong>Review by User ID {{ review.user_id }}:</strong></p>
                     <p>{{ review.review_text }}</p>
-                    <p>Rating: {{ review.rating }}</p>
+                    <p><strong>Rating:</strong> {{ review.rating }}</p>
                 </li>
             {% endfor %}
             </ul>
@@ -28,7 +38,10 @@
         {% endif %}
     </div>
 
-    <a href="{{ url_for('add_review_form', user_id=user_id, movie_id=movie.movie_id) }}" class="btn btn-primary mt-3">Add Review</a>
-    <a href="{{ url_for('list_user_movies', user_id=user_id) }}" class="btn btn-secondary mt-3">Back to Movie List</a>
+    <!-- Buttons -->
+    <div class="mt-4">
+        <a href="{{ url_for('add_review_form', user_id=user_id, movie_id=movie.movie_id) }}" class="btn btn-primary">Add Review</a>
+        <a href="{{ url_for('list_user_movies', user_id=user_id) }}" class="btn btn-secondary">Back to Movie List</a>
+    </div>
 </div>
 {% endblock %}

@@ -1,9 +1,6 @@
-/* Import Bootstrap */
-@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
-
 /* General page settings */
 body {
-    background-color: #f8f9fa; /* Light grey background */
+    background-color: #F8F1F1;
     font-family: 'Arial', sans-serif;
     padding-top: 20px;
 }
@@ -30,9 +27,57 @@ h1, h2, h3 {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Consistent card sizing */
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Cover photo with maintained aspect ratio */
+.card-img-top {
+    max-height: 250px;
+    width: 100%;
+    object-fit: contain; /* Keeps aspect ratio, fits inside the box without cropping */
+}
+
+/* Navbar adjustments for smaller screens */
+.navbar-nav .nav-item.d-none {
+    display: none !important;
+}
+
+@media (min-width: 992px) {
+    .navbar-nav .nav-item.d-none {
+        display: block !important;
+    }
+}
+
+/* Center-align the login button */
+#view_users_button {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Box layout for user profiles */
+.user-profile-box {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.user-profile-box:hover {
+    background-color: #dee2e6;
+    color: #495057;
+}
+
 /* Buttons */
 .btn-custom {
-    background-color: #6c757d; /* Bootstrap secondary button color */
+    background-color: #6c757d;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -41,7 +86,7 @@ h1, h2, h3 {
 }
 
 .btn-custom:hover {
-    background-color: #5a6268; /* Slightly darker for hover effect */
+    background-color: #5a6268;
 }
 
 .btn {
@@ -80,55 +125,29 @@ textarea {
     resize: vertical;
 }
 
-/* Error Page */
-.error-page {
-    text-align: center;
-    padding: 50px;
-}
-
-.error-page h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.error-page p {
-    font-size: 1.2rem;
-}
-
-/* Reviews Section */
-.reviews-section {
-    margin-top: 20px;
-}
-
-.reviews-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.reviews-section li {
-    background-color: #f1f3f5;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.review-item {
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #e9ecef;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Movie Details */
+/* Movie details */
 .movie-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-bottom: 20px;
 }
 
 .movie-details img {
     border-radius: 4px;
-    margin-bottom: 15px;
+    margin-right: 20px;
+    width: 150px;
+}
+
+.movie-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.movie-buttons .btn {
+    width: 150px;
+    margin-bottom: 10px;
 }
 
 /* Small screen adjustments */
@@ -146,7 +165,16 @@ textarea {
         margin-bottom: 10px;
     }
 
+    .movie-details {
+        flex-direction: column;
+    }
+
     .movie-details img {
-        width: 100%; /* Full-width for smaller screens */
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .movie-buttons {
+        align-items: center;
     }
 }
